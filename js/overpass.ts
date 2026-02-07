@@ -808,7 +808,10 @@ class Overpass {
       onSuccessCb.apply(this, cache[query]);
     } else {
       overpass.ajax_request_start = Date.now();
-      overpass.ajax_request = $.ajax(`${server}interpreter`, {
+      const interpreterUrl = settings.api_key
+        ? `${server}interpreter?key=${encodeURIComponent(settings.api_key)}`
+        : `${server}interpreter`;
+      overpass.ajax_request = $.ajax(interpreterUrl, {
         type: "POST",
         data: {data: query, options: options},
         success: onSuccessCb,

@@ -2522,6 +2522,8 @@ class IDE {
         settings.save();
       }
     );
+    ($("#settings-dialog input[name=api_key]")[0] as HTMLInputElement).value =
+      settings.api_key;
     $("#settings-dialog input[name=no_autorepair]")[0].checked =
       settings.no_autorepair;
     $("#settings-dialog input[name=disable_warning_huge_data]")[0].checked =
@@ -2582,7 +2584,8 @@ class IDE {
       ffs_invalidateCache();
     }
     settings.ui_language = new_ui_language;
-    settings.server = $("#settings-dialog input[name=server]")[0].value;
+    settings.server = ($("#settings-dialog input[name=server]")[0] as HTMLInputElement).value;
+    settings.api_key = ($("#settings-dialog input[name=api_key]")[0] as HTMLInputElement).value;
     if (
       configs.suggestedServers.indexOf(settings.server) === -1 &&
       settings.customServers.indexOf(settings.server) === -1

@@ -27,6 +27,7 @@ class Settings {
   disable_poiomatic: boolean;
   show_data_stats: boolean;
   disable_warning_huge_data: boolean;
+  api_key: string;
 
   // meta settings
   first_time_visit: boolean;
@@ -200,6 +201,8 @@ settings.define_setting("disable_poiomatic", "boolean", false, 21);
 settings.define_setting("show_data_stats", "boolean", true, 21);
 // disable poi-o-matic
 settings.define_setting("disable_warning_huge_data", "boolean", false, 39);
+// api key
+settings.define_setting("api_key", "String", "", 40);
 
 //settings.define_setting(,,,);
 
