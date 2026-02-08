@@ -808,12 +808,16 @@ class Overpass {
       onSuccessCb.apply(this, cache[query]);
     } else {
       overpass.ajax_request_start = Date.now();
-      const interpreterUrl = settings.api_key
-        ? `${server}interpreter?key=${encodeURIComponent(settings.api_key)}`
-        : `${server}interpreter`;
-      overpass.ajax_request = $.ajax(interpreterUrl, {
+      
+      // Build POST data with API key included
+      const postData: any = {data: query, options: options};
+      if (settings.api_key) {
+        postData.key = settings.api_key;
+      }
+      
+      overpass.ajax_request = $.ajax(`${server}interpreter`, {
         type: "POST",
-        data: {data: query, options: options},
+        data: postData,
         success: onSuccessCb,
         error(jqXHR, textStatus) {
           if (textStatus == "abort") return; // ignore aborted queries.
